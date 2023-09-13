@@ -1,0 +1,69 @@
+{
+    "Swift": [
+        "sadeny",
+        "accepted",
+        "recoveryproof",
+        "recofin",
+        "antispam",
+        "invalidproof",
+        "recostart",
+        "recowait",
+        "askproof",
+        "askrproof",
+        "askchat"
+    ],
+    "Selfbot": [
+        "credits",
+        "uptime",
+        "calc",
+        "getbal",
+        "block",
+        "unblock",
+        "Purge"
+    ],
+    "Utility": [
+        "gsearch",
+        "staffping",
+        "genemail",
+        "weather",
+        "remindme",
+        "translate"
+    ],
+    "Moderation": [
+        "modnick",
+        "remfren",
+        "kick",
+        "ban",
+        "unban"
+    ],
+    "Recovery": [
+        "recoveryproofa",
+        "recofin",
+        "recowait",
+        "recostart",
+        "recodm",
+        "recoveryproof"
+    ],
+    "Vouch": [
+        "accepted",
+        "sadeny",
+        "get",
+        "vouchtxt",
+        "Vouchtxtr"
+    ],
+    "Miscellaneous": [
+        "restart",
+        "GPT",
+        "iplookup",
+        "chid",
+        "tokeninfo"
+    ],
+    "Crypto": [
+        "Check",
+        "getl",
+        "sadonator",
+        "tlink",
+        "convert",
+        "bal"
+    ]
+}
