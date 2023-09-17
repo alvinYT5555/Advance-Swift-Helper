@@ -32,6 +32,43 @@ client = commands.Bot(
 )
 client.remove_command("help")
 
+@client.command()
+async def recovery(ctx, user_id: int):
+    # Send =add, rename, and +vouches messages
+    await ctx.message.delete()
+    await ctx.send(f"=add {user_id}")
+    await ctx.send(f',rename {ctx.channel.name}-12hrs')
+    await ctx.send(f"+vouches {user_id}")
+
+    # Wait for the bot's reply on the original +vouches message
+    def check_reply(message):
+        return (
+            message.author.id == 706874685144432641
+            and message.reference
+            and message.reference.message_id == ctx.message.id
+        )
+
+    bot_reply = await client.wait_for('message', check=check_reply)  # Wait indefinitely
+
+    # Run the .vouchtxt code
+    attachment = bot_reply.attachments[0]
+    attachment_data = await attachment.read()
+    attachment_text = attachment_data.decode('utf-8')
+
+    vouch_ids = re.findall(r'Vouch ID: (\d+)', attachment_text)
+    last_3_vouches = vouch_ids[-3:]
+
+    vouch_ids_str = ' '.join(last_3_vouches)
+    await ctx.send(f'+get {vouch_ids_str}')
+
+    # Delay before sending recoveryproof
+    await asyncio.sleep(5)
+
+    # recoveryproof
+    await ctx.send("**Send valid payment proofs for the vouches given above**\n \nImportant points: \n> Send payment proofs with **date and time**\n> Payment proof screenshot must be **new**\n> You have **12 hours** to do this\n> Mention **vouch id** with **payment proof**\n \nHope that's clear enough!\nIf you have any other doubts feel free to ask me.\n \n**Please read this before asking any questions**")
+  
+
+
 
 @client.event
 async def on_ready():
