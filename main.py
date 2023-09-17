@@ -1796,11 +1796,31 @@ async def theme(ctx, theme):
                    json={'theme': "light"})
     await ctx.send(f"```Swift Helper```\n**Discord Theme**\n> Light Theme")
 keep_alive()
-try:
-  tokenbot = os.getenv('TOKEN')
-  client.run(tokenbot)
-except discord.errors.LoginFailure:
-  print(
-    f"{Fore.CYAN}Swift Helper | {Fore.RED}ERROR: TOKEN IS INVALID!\n{Fore.RESET}Please put a valid token into config.json.\nTo get your token follow the tutorial here! https://www.youtube.com/watch?v=UN-8hBoDJYw"
-  )
-  os.system('pause >NUL')
+
+
+import os
+import discord.errors
+import PySimpleGUI as sg
+
+sg.theme('DarkBlue')  # Set the GUI theme
+
+layout = [
+    [sg.Text('Enter your Discord token:')],
+    [sg.InputText(key='-TOKEN-')],
+    [sg.Button('Run Bot'), sg.Button('Exit')]
+]
+
+window = sg.Window('Token Input', layout)
+
+while True:
+    event, values = window.read()
+
+    if event == sg.WIN_CLOSED or event == 'Exit':
+        break
+    elif event == 'Run Bot':
+        token = values['-TOKEN-']
+        try:
+            client.run(token)
+            window.close()  # Close the UI window after successful login
+        except discord.errors.LoginFailure:
+            sg.popup_error('ERROR: TOKEN IS INVALID!\nPlease put a valid token.', title='Error')
