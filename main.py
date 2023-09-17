@@ -1520,31 +1520,6 @@ from textblob import TextBlob
 
 formal = False
 
-from PIL import Image
-
-
-@client.command()
-async def ss(ctx, image_path: str, max_width: int, max_height: int):
-  """
-    Resizes a Discord chat screenshot to fit within the specified dimensions while maintaining aspect ratio.
-
-    :param ctx: The context of the command.
-    :param image_path: The path to the Discord chat screenshot.
-    :param max_width: The maximum width of the resized image.
-    :param max_height: The maximum height of the resized image.
-    """
-  from PIL import Image
-  image = Image.open(image_path)
-  width, height = image.size
-  aspect_ratio = width / height
-  new_width = min(max_width, width)
-  new_height = int(new_width / aspect_ratio)
-  if new_height > max_height:
-    new_height = max_height
-    new_width = int(new_height * aspect_ratio)
-  resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
-  # TODO: Add code to save or send the resized image as needed.
-
 
 @client.command()
 async def formalltor(ctx, *, message):
